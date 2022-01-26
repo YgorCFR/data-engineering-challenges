@@ -71,10 +71,10 @@ namespace Q2App
                     };
                     using var streamReader = File.OpenText(fileName);
                     using var csvReader = new CsvReader(streamReader, config);
-                    var salesRecord = csvReader.GetRecords<SalesRecord>();
+                    var salesRecord = csvReader.GetRecords<SalesRecord>().ToList();
                     SqlCommand queryInsert = new SqlCommand(@"",connection);
                     queryInsert.Connection.Open();
-                    if (salesRecord.ToList().Any())
+                    if (salesRecord.Any())
                     {
                         foreach (var sale in salesRecord)
                         {
